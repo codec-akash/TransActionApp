@@ -10,8 +10,18 @@ class Global {
 
   TextStyle subHeaderText = TextStyle(
     fontSize: 18.0,
-    color: Colors.white,
   );
 
   BorderRadiusGeometry borderRadius = BorderRadius.circular(10.0);
+
+  InputDecoration textFieldDecoration = InputDecoration(
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.red),
+    ),
+    fillColor: Colors.white,
+    filled: true,
+  );
 }

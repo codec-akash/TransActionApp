@@ -1,11 +1,11 @@
 class UserModel {
   final String userId;
   final String userName;
-  final double balance;
+  double balance;
 
   UserModel({
     this.userId,
     this.userName,
-    this.balance,
+    this.balance = 5000.0,
   });
 }

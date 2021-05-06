@@ -1,6 +1,8 @@
+import 'package:AkudoTask/models/user_model.dart';
 import 'package:AkudoTask/pages/send_tranaction/send_tranaction_page.dart';
 import 'package:AkudoTask/pages/transaction_page/received_tranaction_page.dart';
 import 'package:AkudoTask/providers/theme_provider.dart';
+import 'package:AkudoTask/providers/user_provider.dart';
 import 'package:AkudoTask/utils/global.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,17 +13,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool revealAmount = false;
+  UserModel userData;
+
+  @override
+  void didChangeDependencies() {
+    Provider.of<UserProvider>(context, listen: false).createInitialUser();
+    userData = Provider.of<UserProvider>(context, listen: false).userDetails;
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeNotifier>(context);
-
-    bool revealAmount = false;
-
     return Scaffold(
       appBar: AppBar(
         title: Text("TaskApp"),
       ),
-      backgroundColor: Theme.of(context).backgroundColor,
       drawer: Drawer(
         child: ListView(
           children: [
@@ -125,7 +133,7 @@ class _HomePageState extends State<HomePage> {
               "Heyy, Your Current Total Amount is :",
               style: TextStyle(
                 fontSize: 26.0,
-                color: Colors.white,
+                color: Theme.of(context).primaryColor,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -136,11 +144,11 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.symmetric(vertical: 15.0),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
-                textColor: Colors.white,
+                textColor: Theme.of(context).primaryColor,
                 borderSide: BorderSide(
                     color: Theme.of(context).primaryColor, width: 2.0),
                 child: Text(
-                  revealAmount ? "0.0" : "Click to reveal",
+                  revealAmount ? "${userData.balance}" : "Click to reveal",
                   style: TextStyle(fontSize: 18.0),
                 ),
                 onPressed: () {
