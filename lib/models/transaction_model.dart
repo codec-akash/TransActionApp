@@ -4,6 +4,7 @@ class Transaction {
   final double amount;
   final String description;
   final bool moneySent;
+  final bool tranSuccess;
   final DateTime dateTime;
 
   Transaction({
@@ -12,6 +13,7 @@ class Transaction {
     this.amount,
     this.description,
     this.moneySent,
+    this.tranSuccess,
     this.dateTime,
   });
 }

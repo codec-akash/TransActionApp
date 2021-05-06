@@ -1,6 +1,6 @@
 import 'package:AkudoTask/models/user_model.dart';
 import 'package:AkudoTask/pages/send_tranaction/sent_money_card.dart';
-import 'package:AkudoTask/pages/transaction_page/received_tranaction_page.dart';
+import 'package:AkudoTask/pages/send_tranaction/received_tranaction_page.dart';
 import 'package:AkudoTask/providers/user_provider.dart';
 import 'package:AkudoTask/utils/global.dart';
 import 'package:flutter/material.dart';

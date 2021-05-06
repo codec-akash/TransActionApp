@@ -1,6 +1,6 @@
 import 'package:AkudoTask/models/user_model.dart';
 import 'package:AkudoTask/pages/send_tranaction/send_tranaction_page.dart';
-import 'package:AkudoTask/pages/transaction_page/received_tranaction_page.dart';
+import 'package:AkudoTask/pages/send_tranaction/received_tranaction_page.dart';
 import 'package:AkudoTask/providers/theme_provider.dart';
 import 'package:AkudoTask/providers/user_provider.dart';
 import 'package:AkudoTask/utils/global.dart';
@@ -156,6 +156,32 @@ class _HomePageState extends State<HomePage> {
                     revealAmount = !revealAmount;
                   });
                 },
+              ),
+            ),
+            SizedBox(height: 20.0),
+            Text(
+              "Want To See your transactrions ?",
+              style: TextStyle(
+                fontSize: 26.0,
+                color: Theme.of(context).primaryColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 20.0),
+            Container(
+              width: double.infinity,
+              child: OutlineButton(
+                padding: EdgeInsets.symmetric(vertical: 15.0),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
+                textColor: Theme.of(context).primaryColor,
+                borderSide: BorderSide(
+                    color: Theme.of(context).primaryColor, width: 2.0),
+                child: Text(
+                  "Click here",
+                  style: TextStyle(fontSize: 18.0),
+                ),
+                onPressed: () {},
               ),
             )
           ],

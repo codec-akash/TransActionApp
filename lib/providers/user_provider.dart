@@ -42,25 +42,25 @@ class UserProvider with ChangeNotifier {
         addedUsers.firstWhere((element) => element.userId == userId);
     bool isTrasactionComplete = Random().nextBool();
     print(isTrasactionComplete);
+    if (_user.balance < amount) {
+      throw 'Not enough balance';
+    }
+    Transaction transaction = Transaction(
+      transId: DateTime.now().toIso8601String(),
+      userId: _user.userId,
+      amount: amount,
+      description: description,
+      dateTime: DateTime.now(),
+      moneySent: true,
+      tranSuccess: isTrasactionComplete,
+    );
+    userTransaction.add(transaction);
     if (isTrasactionComplete) {
-      Transaction transaction = Transaction(
-        transId: DateTime.now().toIso8601String(),
-        userId: _user.userId,
-        amount: amount,
-        description: description,
-        dateTime: DateTime.now(),
-        moneySent: true,
-      );
-      if (_user.balance < amount) {
-        throw 'Not enough balance';
-      } else {
-        _user.balance -= amount;
-        targetUser.balance += amount;
-        userTransaction.add(transaction);
-      }
-      notifyListeners();
+      _user.balance -= amount;
+      targetUser.balance += amount;
     } else {
       throw 'Transaction Failed due to some issue';
     }
+    notifyListeners();
   }
 }
