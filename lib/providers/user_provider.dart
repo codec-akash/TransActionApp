@@ -14,6 +14,10 @@ class UserProvider with ChangeNotifier {
 
   List<UserModel> get addedUserList => [...addedUsers];
 
+  UserModel getSpecificUser(String userId) {
+    return addedUsers.firstWhere((element) => element.userId == userId);
+  }
+
   void addUser(String name) {
     print("reached");
     UserModel newUser = UserModel(
@@ -47,7 +51,7 @@ class UserProvider with ChangeNotifier {
     }
     Transaction transaction = Transaction(
       transId: DateTime.now().toIso8601String(),
-      userId: _user.userId,
+      userId: userId,
       amount: amount,
       description: description,
       dateTime: DateTime.now(),

@@ -12,6 +12,9 @@ class Global {
     fontSize: 18.0,
   );
 
+  TextStyle titleText = TextStyle(
+      fontSize: 16.0, color: Colors.white, fontWeight: FontWeight.w400);
+
   BorderRadiusGeometry borderRadius = BorderRadius.circular(10.0);
 
   InputDecoration textFieldDecoration = InputDecoration(
@@ -23,5 +26,10 @@ class Global {
     ),
     fillColor: Colors.white,
     filled: true,
+  );
+
+  BoxDecoration containerDecoration = BoxDecoration(
+    borderRadius: BorderRadius.circular(10.0),
+    border: Border.all(color: Colors.black, width: 2.0),
   );
 }

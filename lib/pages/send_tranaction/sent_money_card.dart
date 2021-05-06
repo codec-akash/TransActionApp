@@ -66,10 +66,9 @@ class _UserCardState extends State<UserCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        border: Border.all(color: Theme.of(context).accentColor, width: 2.0),
-      ),
+      decoration: Global()
+          .containerDecoration
+          .copyWith(border: Border.all(color: Theme.of(context).accentColor)),
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
       margin: EdgeInsets.symmetric(vertical: 8.0),
       child: Column(

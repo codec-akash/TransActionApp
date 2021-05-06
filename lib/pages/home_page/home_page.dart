@@ -1,6 +1,7 @@
 import 'package:AkudoTask/models/user_model.dart';
 import 'package:AkudoTask/pages/send_tranaction/send_tranaction_page.dart';
 import 'package:AkudoTask/pages/send_tranaction/received_tranaction_page.dart';
+import 'package:AkudoTask/pages/transaction_page/transaction_list.dart';
 import 'package:AkudoTask/providers/theme_provider.dart';
 import 'package:AkudoTask/providers/user_provider.dart';
 import 'package:AkudoTask/utils/global.dart';
@@ -62,6 +63,9 @@ class _HomePageState extends State<HomePage> {
                     color: theme.darkTheme ? Colors.white : Colors.black),
               ),
               trailing: Icon(Icons.send_outlined),
+              onTap: () {
+                Navigator.of(context).pushNamed(SendTransaction.routeName);
+              },
             ),
             ListTile(
               title: Text(
@@ -70,6 +74,20 @@ class _HomePageState extends State<HomePage> {
                     color: theme.darkTheme ? Colors.white : Colors.black),
               ),
               trailing: Icon(Icons.call_received_sharp),
+              onTap: () {
+                Navigator.of(context).pushNamed(ReceiveTranaction.routeName);
+              },
+            ),
+            ListTile(
+              title: Text(
+                "Transaction History",
+                style: Global().subHeaderText.copyWith(
+                    color: theme.darkTheme ? Colors.white : Colors.black),
+              ),
+              trailing: Icon(Icons.history_rounded),
+              onTap: () {
+                Navigator.of(context).pushNamed(TransactionList.routeName);
+              },
             ),
           ],
         ),
@@ -91,7 +109,10 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Send"),
+                    Text(
+                      "Send",
+                      style: Global().titleText,
+                    ),
                     SizedBox(width: 8.0),
                     Icon(Icons.send_outlined),
                   ],
@@ -112,7 +133,10 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Receive"),
+                    Text(
+                      "Receive",
+                      style: Global().titleText,
+                    ),
                     SizedBox(width: 8.0),
                     Icon(Icons.call_received_sharp),
                   ],
@@ -160,7 +184,7 @@ class _HomePageState extends State<HomePage> {
             ),
             SizedBox(height: 20.0),
             Text(
-              "Want To See your transactrions ?",
+              "Want To See your transactions ?",
               style: TextStyle(
                 fontSize: 26.0,
                 color: Theme.of(context).primaryColor,
@@ -181,7 +205,9 @@ class _HomePageState extends State<HomePage> {
                   "Click here",
                   style: TextStyle(fontSize: 18.0),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed(TransactionList.routeName);
+                },
               ),
             )
           ],
