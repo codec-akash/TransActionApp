@@ -1,6 +1,8 @@
 import 'package:AkudoTask/models/user_model.dart';
+import 'package:AkudoTask/providers/user_provider.dart';
 import 'package:AkudoTask/utils/global.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UserCard extends StatefulWidget {
   final UserModel userData;
@@ -31,6 +33,36 @@ class _UserCardState extends State<UserCard> {
     }
   }
 
+  void deleteUser() {
+    Provider.of<UserProvider>(context, listen: false)
+        .deleteUser(widget.userData.userId);
+  }
+
+  void showDialogBox() {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('Delete Friend'),
+        content: Text('Are you sure you want to delete this friend'),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Okay'),
+            onPressed: () {
+              deleteUser();
+              Navigator.of(context).pop();
+            },
+          ),
+          FlatButton(
+            child: Text('Cancel'),
+            onPressed: () {
+              Navigator.of(ctx).pop();
+            },
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,6 +71,7 @@ class _UserCardState extends State<UserCard> {
         border: Border.all(color: Theme.of(context).accentColor, width: 2.0),
       ),
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
+      margin: EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
         children: [
           Row(
@@ -70,7 +103,9 @@ class _UserCardState extends State<UserCard> {
                   SizedBox(width: 10.0),
                   IconButton(
                     icon: Icon(Icons.delete_outline_rounded, color: Colors.red),
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialogBox();
+                    },
                   )
                 ],
               ),

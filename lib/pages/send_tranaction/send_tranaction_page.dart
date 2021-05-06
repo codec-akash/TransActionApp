@@ -33,6 +33,7 @@ class _SendTransactionState extends State<SendTransaction> {
     if (_formKey.currentState.validate()) {
       Provider.of<UserProvider>(context, listen: false)
           .addUser(_nameController.text);
+      _nameController.clear();
       Navigator.of(context).pop();
     }
   }
@@ -138,7 +139,13 @@ class _SendTransactionState extends State<SendTransaction> {
               thickness: 0.9,
             ),
             SizedBox(height: 10.0),
-            Text("Current Balance: ${userData.balance}"),
+            Text(
+              "Current Balance:  ${userData.balance}",
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(height: 10.0),
+            if (userList.length > 0) Text("Friend List :"),
+            SizedBox(height: 5.0),
             Expanded(
               child: ListView.builder(
                 itemCount: userList.length,
