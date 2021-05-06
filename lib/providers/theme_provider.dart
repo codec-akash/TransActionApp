@@ -6,7 +6,7 @@ ThemeData light = ThemeData(
   brightness: Brightness.light,
   primaryColor: Color(0xff009688),
   accentColor: Color(0xff42A5F5),
-  backgroundColor: Color(0xff4DD0E1),
+  backgroundColor: Color(0xff42A5F5),
   textTheme: GoogleFonts.playfairDisplayTextTheme(),
 );
 

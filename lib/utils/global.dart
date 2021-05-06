@@ -12,4 +12,6 @@ class Global {
     fontSize: 18.0,
     color: Colors.white,
   );
+
+  BorderRadiusGeometry borderRadius = BorderRadius.circular(10.0);
 }

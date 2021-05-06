@@ -1,7 +1,7 @@
 class Transaction {
   final String transId;
   final String userId;
-  final String amount;
+  final double amount;
   final String description;
   final DateTime dateTime;
 
