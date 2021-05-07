@@ -16,11 +16,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(
-          value: ThemeNotifier(),
+        ChangeNotifierProvider(
+          create: (_) => ThemeNotifier(),
         ),
-        ChangeNotifierProvider.value(
-          value: UserProvider(),
+        ChangeNotifierProvider(
+          create: (_) => UserProvider(),
         ),
       ],
       child: Consumer<ThemeNotifier>(

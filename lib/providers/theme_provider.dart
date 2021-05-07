@@ -7,7 +7,8 @@ ThemeData light = ThemeData(
   primaryColor: Color(0xff009688),
   accentColor: Color(0xff42A5F5),
   backgroundColor: Color(0xff42A5F5),
-  textTheme: GoogleFonts.playfairDisplayTextTheme(),
+  textTheme:
+      GoogleFonts.playfairDisplayTextTheme().apply(bodyColor: Colors.black),
 );
 
 ThemeData dark = ThemeData(
@@ -15,7 +16,8 @@ ThemeData dark = ThemeData(
   primaryColor: Colors.green[800],
   accentColor: Colors.deepOrangeAccent,
   backgroundColor: Colors.blueGrey[800],
-  textTheme: GoogleFonts.playfairDisplayTextTheme(),
+  textTheme:
+      GoogleFonts.playfairDisplayTextTheme().apply(bodyColor: Colors.white),
 );
 
 class ThemeNotifier extends ChangeNotifier {

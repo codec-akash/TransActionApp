@@ -67,4 +67,31 @@ class UserProvider with ChangeNotifier {
     }
     notifyListeners();
   }
+
+  void receiveMoney(String userId, double amount, String description) {
+    UserModel targetUser =
+        addedUsers.firstWhere((element) => element.userId == userId);
+    bool isTrasactionComplete = Random().nextBool();
+    print(isTrasactionComplete);
+    if (amount > targetUser.balance) {
+      throw "Your Friend does not have enough balance";
+    }
+    Transaction transaction = Transaction(
+      transId: DateTime.now().toIso8601String(),
+      userId: userId,
+      amount: amount,
+      description: description,
+      tranSuccess: isTrasactionComplete,
+      moneySent: false,
+      dateTime: DateTime.now(),
+    );
+    userTransaction.add(transaction);
+    if (isTrasactionComplete) {
+      _user.balance += amount;
+      targetUser.balance -= amount;
+    } else {
+      throw 'Your Friend denied payment';
+    }
+    notifyListeners();
+  }
 }

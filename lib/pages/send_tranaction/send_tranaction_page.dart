@@ -1,4 +1,5 @@
 import 'package:AkudoTask/models/user_model.dart';
+import 'package:AkudoTask/pages/send_tranaction/bottom_modal_sheet.dart';
 import 'package:AkudoTask/pages/send_tranaction/sent_money_card.dart';
 import 'package:AkudoTask/pages/send_tranaction/received_tranaction_page.dart';
 import 'package:AkudoTask/providers/user_provider.dart';
@@ -17,25 +18,13 @@ class _SendTransactionState extends State<SendTransaction> {
   List<UserModel> userList = [];
   UserModel userData;
 
-  TextEditingController _nameController = TextEditingController();
-
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  final _formKey = GlobalKey<FormState>();
 
   @override
   void didChangeDependencies() {
     userList = Provider.of<UserProvider>(context).addedUserList;
     userData = Provider.of<UserProvider>(context).userDetails;
     super.didChangeDependencies();
-  }
-
-  void submitUser() {
-    if (_formKey.currentState.validate()) {
-      Provider.of<UserProvider>(context, listen: false)
-          .addUser(_nameController.text);
-      _nameController.clear();
-      Navigator.of(context).pop();
-    }
   }
 
   void sendMoney(String userId, String description, double amount) {
@@ -48,54 +37,12 @@ class _SendTransactionState extends State<SendTransaction> {
     }
   }
 
-  Widget addUser() {
-    return SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              SizedBox(height: 50.0),
-              TextFormField(
-                controller: _nameController,
-                decoration: Global()
-                    .textFieldDecoration
-                    .copyWith(labelText: 'User Name'),
-                validator: (value) {
-                  if (value.length < 3) {
-                    return 'Enter a valid name';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 20.0),
-              Container(
-                margin: EdgeInsets.only(bottom: 20.0),
-                width: double.infinity,
-                child: RaisedButton(
-                  padding: EdgeInsets.symmetric(vertical: 15.0),
-                  color: Theme.of(context).accentColor,
-                  textColor: Colors.white,
-                  child: Text("Add User"),
-                  onPressed: () {
-                    submitUser();
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text("Send Transaction"),
+        title: Text("Send Money"),
         actions: [
           IconButton(
             icon: Icon(Icons.add),
@@ -110,7 +57,7 @@ class _SendTransactionState extends State<SendTransaction> {
                 )),
                 builder: (context) => Padding(
                   padding: MediaQuery.of(context).viewInsets,
-                  child: addUser(),
+                  child: BottomModalSheet(),
                 ),
               );
             },

@@ -33,28 +33,38 @@ class TransCard extends StatelessWidget {
             ),
           ),
           SizedBox(width: 20.0),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "TO : ${userModel.userName}",
-                style: Global().titleText,
-              ),
-              Text(
-                "Id: ${transaction.userId}",
-                style: Global().titleText,
-              ),
-              SizedBox(height: 10),
-              Text(
-                "Date:  ${transaction.dateTime}",
-                style: Global().titleText,
-              ),
-              SizedBox(height: 10),
-              Text(
-                "Amount:  ${transaction.amount}",
-                style: Global().titleText,
-              ),
-            ],
+          Container(
+            width: MediaQuery.of(context).size.width * 0.65,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "TO : ${userModel.userName}",
+                  style: Global().titleText,
+                ),
+                Text(
+                  "Id: ${transaction.transId}",
+                  softWrap: false,
+                  style: Global().titleText,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "Date:  ${Global().dateformatDefault(transaction.dateTime)}",
+                  style: Global().titleText,
+                ),
+                SizedBox(height: 5),
+                Text(
+                  "Amount:  ${transaction.amount}",
+                  style: Global().titleText,
+                ),
+                SizedBox(height: 5),
+                if (transaction.description.isNotEmpty)
+                  Text(
+                    "Description:  ${transaction.description}",
+                    style: Global().titleText,
+                  ),
+              ],
+            ),
           )
         ],
       ),
