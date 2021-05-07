@@ -101,7 +101,16 @@ class _SendTransactionState extends State<SendTransaction> {
                   fontSize: 16.0, color: Theme.of(context).accentColor),
             ),
             SizedBox(height: 10.0),
-            if (userList.length > 0) Text("Friend List :"),
+            userList.length > 0
+                ? Text("Friend List :")
+                : Expanded(
+                    child: Center(
+                      child: Text(
+                        "Add New Friends from top !",
+                        style: Global().subHeaderText,
+                      ),
+                    ),
+                  ),
             SizedBox(height: 5.0),
             Expanded(
               child: ListView.builder(
