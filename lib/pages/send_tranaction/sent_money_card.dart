@@ -23,8 +23,10 @@ class _UserCardState extends State<UserCard> {
   void sendMoneyFromUser() {
     if (_form.currentState.validate()) {
       double amount = double.parse(_amountController.text);
-      widget.sendMoney(
-          widget.userData.userId, _descriptionController.text.trim(), amount);
+      double rewards = Provider.of<UserProvider>(context, listen: false)
+          .calculateReward(amount);
+      widget.sendMoney(widget.userData.userId,
+          _descriptionController.text.trim(), amount, rewards);
       setState(() {
         _amountController.clear();
         _descriptionController.clear();

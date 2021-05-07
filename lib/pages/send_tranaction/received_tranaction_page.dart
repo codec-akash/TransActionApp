@@ -1,4 +1,5 @@
 import 'package:AkudoTask/models/user_model.dart';
+import 'package:AkudoTask/pages/send_tranaction/reward_dialog.dart';
 import 'package:AkudoTask/pages/send_tranaction/send_tranaction_page.dart';
 import 'package:AkudoTask/pages/send_tranaction/sent_money_card.dart';
 import 'package:AkudoTask/providers/user_provider.dart';
@@ -28,10 +29,13 @@ class _ReceiveTranactionState extends State<ReceiveTranaction> {
     super.didChangeDependencies();
   }
 
-  void receiveMoney(String userId, String description, double amount) {
+  void receiveMoney(
+      String userId, String description, double amount, double rewards) {
     try {
       Provider.of<UserProvider>(context, listen: false)
-          .receiveMoney(userId, amount, description);
+          .receiveMoney(userId, amount, description, rewards);
+      showDialog(
+          context: context, builder: (ctx) => RewardDialog(rewards: rewards));
     } catch (e) {
       print(e);
       _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("$e")));

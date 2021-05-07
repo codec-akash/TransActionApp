@@ -57,6 +57,10 @@ class TransCard extends StatelessWidget {
                   "Amount:  ${transaction.amount}",
                   style: Global().titleText,
                 ),
+                Text(
+                  "Rewards:  ${transaction.rewards}",
+                  style: Global().titleText,
+                ),
                 SizedBox(height: 5),
                 if (transaction.description.isNotEmpty)
                   Text(

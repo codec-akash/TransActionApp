@@ -1,5 +1,6 @@
 import 'package:AkudoTask/models/user_model.dart';
 import 'package:AkudoTask/pages/send_tranaction/bottom_modal_sheet.dart';
+import 'package:AkudoTask/pages/send_tranaction/reward_dialog.dart';
 import 'package:AkudoTask/pages/send_tranaction/sent_money_card.dart';
 import 'package:AkudoTask/pages/send_tranaction/received_tranaction_page.dart';
 import 'package:AkudoTask/providers/user_provider.dart';
@@ -27,10 +28,13 @@ class _SendTransactionState extends State<SendTransaction> {
     super.didChangeDependencies();
   }
 
-  void sendMoney(String userId, String description, double amount) {
+  void sendMoney(
+      String userId, String description, double amount, double rewards) {
     try {
       Provider.of<UserProvider>(context, listen: false)
-          .sendMoney(userId, amount, description);
+          .sendMoney(userId, amount, description, rewards);
+      showDialog(
+          context: context, builder: (ctx) => RewardDialog(rewards: rewards));
     } catch (e) {
       print(e);
       _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("$e")));
@@ -88,7 +92,13 @@ class _SendTransactionState extends State<SendTransaction> {
             SizedBox(height: 10.0),
             Text(
               "Current Balance:  ${userData.balance}",
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 20),
+            ),
+            SizedBox(height: 10.0),
+            Text(
+              "Get amazing rewards on transaction for more then 500 Rs",
+              style: TextStyle(
+                  fontSize: 16.0, color: Theme.of(context).accentColor),
             ),
             SizedBox(height: 10.0),
             if (userList.length > 0) Text("Friend List :"),

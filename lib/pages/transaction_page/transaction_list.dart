@@ -10,7 +10,7 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Transaction> transaction =
-        Provider.of<UserProvider>(context, listen: false).userTransaction;
+        Provider.of<UserProvider>(context, listen: false).userTrans;
     return Scaffold(
       appBar: AppBar(
         title: Text("Transaction History"),

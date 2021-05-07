@@ -8,7 +8,7 @@ class UserProvider with ChangeNotifier {
   int loggedIn = 0;
   UserModel _user;
   List<UserModel> addedUsers = [];
-  List<Transaction> userTransaction = [];
+  List<Transaction> _userTransaction = [];
 
   UserModel get userDetails => _user;
 
@@ -17,6 +17,8 @@ class UserProvider with ChangeNotifier {
   UserModel getSpecificUser(String userId) {
     return addedUsers.firstWhere((element) => element.userId == userId);
   }
+
+  List<Transaction> get userTrans => _userTransaction.reversed.toList();
 
   void addUser(String name) {
     print("reached");
@@ -41,7 +43,8 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  void sendMoney(String userId, double amount, String description) {
+  void sendMoney(
+      String userId, double amount, String description, double rewards) {
     UserModel targetUser =
         addedUsers.firstWhere((element) => element.userId == userId);
     bool isTrasactionComplete = Random().nextBool();
@@ -57,18 +60,21 @@ class UserProvider with ChangeNotifier {
       dateTime: DateTime.now(),
       moneySent: true,
       tranSuccess: isTrasactionComplete,
+      rewards: isTrasactionComplete ? rewards : 0.0,
     );
-    userTransaction.add(transaction);
+    _userTransaction.add(transaction);
     if (isTrasactionComplete) {
       _user.balance -= amount;
       targetUser.balance += amount;
+      _user.balance += rewards;
     } else {
       throw 'Transaction Failed due to some issue';
     }
     notifyListeners();
   }
 
-  void receiveMoney(String userId, double amount, String description) {
+  void receiveMoney(
+      String userId, double amount, String description, double rewards) {
     UserModel targetUser =
         addedUsers.firstWhere((element) => element.userId == userId);
     bool isTrasactionComplete = Random().nextBool();
@@ -84,14 +90,25 @@ class UserProvider with ChangeNotifier {
       tranSuccess: isTrasactionComplete,
       moneySent: false,
       dateTime: DateTime.now(),
+      rewards: isTrasactionComplete ? rewards : 0.0,
     );
-    userTransaction.add(transaction);
+    _userTransaction.add(transaction);
     if (isTrasactionComplete) {
       _user.balance += amount;
       targetUser.balance -= amount;
+      _user.balance += rewards;
     } else {
       throw 'Your Friend denied payment';
     }
     notifyListeners();
+  }
+
+  double calculateReward(double amount) {
+    double reward = 0.0;
+    if (amount > 500.0) {
+      int percent = Random().nextInt(100);
+      reward = amount * percent / 100;
+    }
+    return reward;
   }
 }
