@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
               color: Theme.of(context).accentColor,
               alignment: Alignment.bottomLeft,
               child: Text(
-                "  Hello Yongster,",
+                "  Hello Kiddo,",
                 style: Global().headerText,
               ),
             ),
