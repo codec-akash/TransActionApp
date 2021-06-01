@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+//This is theme data
+
 ThemeData light = ThemeData(
   brightness: Brightness.light,
   primaryColor: Color(0xff009688),
